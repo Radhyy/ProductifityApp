@@ -1,0 +1,137 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #ffffff; /* White background as requested */
+  padding: 24px;
+}
+
+.authCard {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff; /* White card */
+  border-radius: 32px;
+  padding: 40px 32px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); /* Soft drop shadow */
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 15px;
+  margin-bottom: 32px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #e5e5ea;
+  background: #f9f9f9;
+  color: #111;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input::placeholder {
+  color: #999;
+}
+
+.input:focus {
+  background: #fff;
+  border-color: #000;
+  box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+}
+
+.eyeBtn {
+  position: absolute;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 18px;
+  border-radius: 16px;
+  border: none;
+  background: #000;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: transform 0.1s ease;
+}
+
+.submitBtn:active {
+  transform: scale(0.98);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.errorMsg {
+  background: rgba(255, 59, 48, 0.1);
+  color: #ff3b30;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 59, 48, 0.2);
+}
+
+.switchText {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 15px;
+  color: #666;
+}
+
+.switchBtn {
+  background: none;
+  border: none;
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 6px;
+  font-size: 15px;
+}
