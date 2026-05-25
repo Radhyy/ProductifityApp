@@ -28,11 +28,11 @@ export default function FloatingChat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Initial position bottom right
+    // Initial position bottom right, slightly above the bottom navbar
     if (typeof window !== "undefined" && position.x === -1) {
       setPosition({
         x: window.innerWidth - 80,
-        y: window.innerHeight - 80
+        y: window.innerHeight - 140
       });
     }
   }, []);
