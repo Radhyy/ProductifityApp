@@ -6,9 +6,12 @@ import { useEffect, useState } from "react";
 import { checkAuth } from "@/actions/auth";
 import { getTasks, toggleTaskCompletion } from "@/actions/tasks";
 import { getStats } from "@/actions/stats";
+import { getWishlists } from "@/actions/wishlist";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const [user, setUser] = useState<any>(null);
   const [loadingUser, setLoadingUser] = useState(true);
   const [locationGranted, setLocationGranted] = useState(false);
@@ -19,6 +22,7 @@ export default function Home() {
   const [focusMinutes, setFocusMinutes] = useState(0);
   const [showNotifs, setShowNotifs] = useState(false);
   const [notifs, setNotifs] = useState<any[]>([]);
+  const [wishlist, setWishlist] = useState<any>(null);
 
   useEffect(() => {
     // Fetch User
@@ -34,6 +38,13 @@ export default function Home() {
         // Load Focus Stats
         getStats().then(sRes => {
           if (sRes.success) setFocusMinutes(sRes.data?.focusMinutes || 0);
+        });
+
+        // Load Wishlist
+        getWishlists().then(wRes => {
+          if (wRes.success && wRes.data.length > 0) {
+            setWishlist(wRes.data[0]); // Show latest wishlist
+          }
         });
 
         // Load notifications (Upcoming Calendar Events)
@@ -179,7 +190,7 @@ export default function Home() {
               )}
             </div>
             <div style={{ marginTop: 8, background: 'rgba(255,255,255,0.95)', padding: '6px 16px', borderRadius: 20, fontSize: 13, fontWeight: 600, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', backdropFilter: 'blur(8px)' }}>
-              {loadingUser ? "Loading..." : user ? user.name : "Mobbin House"} <span style={{ color: '#888', fontWeight: 400 }}>for 12 min ›</span>
+              {loadingUser ? "Loading..." : user ? user.name : "Mobbin House"} <span style={{ color: '#888', fontWeight: 400 }}>in {city} ›</span>
             </div>
         </div>
       </div>
@@ -193,9 +204,9 @@ export default function Home() {
 
         <div className={styles.grid}>
           {/* Weather Card */}
-          <div className={`glass-card ${styles.gridCard}`} style={{ position: 'relative', overflow: 'hidden', minHeight: 160, display: 'flex', flexDirection: 'column' }}>
+          <div className={`glass-card ${styles.gridCard}`} style={{ position: 'relative', overflow: 'hidden', minHeight: 160, display: 'flex', flexDirection: 'column', cursor: 'pointer' }} onClick={() => router.push('/weather')}>
             <div className={styles.cardHeader} style={{ zIndex: 2 }}>
-              <span>Weather</span>
+              <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Weather • {city}</span>
               <ChevronRight size={16} className="text-muted" color="#8e8e93" />
             </div>
             {/* Adjust text position by using flex-grow and margin */}
@@ -267,6 +278,42 @@ export default function Home() {
           )}
         </div>
       </div>
+
+      {/* Wishlist Widget */}
+      <div className={styles.sectionHeader} style={{ marginTop: "24px" }}>
+        <h2>Tabungan Wishlist</h2>
+        <Link href="/wishlist" style={{ color: '#888', fontSize: 14, textDecoration: 'none' }}>View all &gt;</Link>
+      </div>
+      <div className={`glass-card ${styles.fullCard}`} style={{ cursor: 'pointer', padding: '16px' }} onClick={() => router.push('/wishlist')}>
+        {wishlist ? (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div style={{ width: 60, height: 60, borderRadius: 12, background: '#f0f0f0', overflow: 'hidden', flexShrink: 0 }}>
+              {wishlist.image ? (
+                <img src={wishlist.image} alt="wishlist" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : (
+                <Gift size={24} color="#aaa" style={{ margin: 18 }} />
+              )}
+            </div>
+            <div style={{ flexGrow: 1 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                <span style={{ fontWeight: 600, fontSize: 15, color: '#333' }}>{wishlist.title}</span>
+                <span style={{ fontSize: 13, color: '#34c759', fontWeight: 600 }}>
+                  {Math.min(100, Math.round((wishlist.currentAmount / wishlist.targetAmount) * 100))}%
+                </span>
+              </div>
+              <div style={{ height: 8, background: '#e5e5ea', borderRadius: 4, overflow: 'hidden' }}>
+                <div style={{ height: '100%', background: 'linear-gradient(90deg, #34c759, #30d158)', width: `${Math.min(100, Math.round((wishlist.currentAmount / wishlist.targetAmount) * 100))}%` }}></div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div style={{ textAlign: 'center', padding: '12px 0' }}>
+            <p style={{ fontSize: 14, color: '#888', marginBottom: 8 }}>Belum ada tabungan wishlist.</p>
+            <span style={{ color: 'var(--accent-blue)', fontWeight: 600, fontSize: 14 }}>+ Buat Target Baru</span>
+          </div>
+        )}
+      </div>
+
     </main>
   );
 }

@@ -1,0 +1,139 @@
+.container {
+  padding: 24px 20px;
+  min-height: 100vh;
+  padding-bottom: 100px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.backBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  cursor: pointer;
+  padding: 8px;
+  margin-left: -8px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.currentCard {
+  background: linear-gradient(135deg, #3b82f6, #93c5fd);
+  border-radius: 24px;
+  padding: 32px 24px;
+  color: white;
+  margin-bottom: 24px;
+  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.3);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cityName {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.tempMain {
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1;
+  margin: 16px 0;
+}
+
+.descMain {
+  font-size: 18px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.detailsRow {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.detailCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.detailLabel {
+  font-size: 12px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detailValue {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+
+.forecastList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.forecastItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.forecastDay {
+  font-weight: 600;
+  color: var(--text-main);
+  width: 100px;
+}
+
+.forecastIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forecastTemps {
+  display: flex;
+  gap: 12px;
+  font-weight: 500;
+}
+
+.tempMax {
+  color: var(--text-main);
+}
+
+.tempMin {
+  color: var(--text-muted);
+}
