@@ -16,6 +16,9 @@ export default function WishlistPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [amount, setAmount] = useState("");
 
+  // Delete Confirm Modal
+  const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
+
   useEffect(() => {
     loadData();
   }, []);
@@ -47,8 +50,8 @@ export default function WishlistPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Hapus wishlist ini?")) return;
     setWishlists(prev => prev.filter(w => w.id !== id));
+    setDeleteConfirmId(null);
     await deleteWishlist(id);
   };
 
@@ -98,7 +101,7 @@ export default function WishlistPage() {
           return (
             <div key={w.id} className={styles.card}>
               <button 
-                onClick={() => handleDelete(w.id)}
+                onClick={() => setDeleteConfirmId(w.id)}
                 style={{ position: 'absolute', top: 16, right: 16, background: 'transparent', border: 'none', color: '#ff3b30', cursor: 'pointer' }}
               >
                 <Trash2 size={20} />
@@ -171,6 +174,25 @@ export default function WishlistPage() {
                 setAmount("");
               }}>Batal</button>
               <button className={styles.saveBtn} onClick={handleAddFunds}>Simpan</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Delete Confirm */}
+      {deleteConfirmId && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent} style={{ textAlign: 'center' }}>
+            <div style={{ background: '#ffeeee', width: 64, height: 64, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+              <Trash2 size={32} color="#ff3b30" />
+            </div>
+            <h3 className={styles.modalTitle} style={{ marginBottom: 8 }}>Hapus Wishlist?</h3>
+            <p style={{ fontSize: 14, color: 'var(--text-muted)', marginBottom: 24 }}>
+              Apakah Anda yakin ingin menghapus target tabungan ini? Data yang sudah dihapus tidak dapat dikembalikan.
+            </p>
+            <div className={styles.modalActions}>
+              <button className={styles.cancelBtn} onClick={() => setDeleteConfirmId(null)}>Batal</button>
+              <button className={styles.saveBtn} style={{ background: '#ff3b30' }} onClick={() => handleDelete(deleteConfirmId)}>Ya, Hapus</button>
             </div>
           </div>
         </div>
