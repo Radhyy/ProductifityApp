@@ -6,6 +6,7 @@ import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import NotificationEngine from "@/components/NotificationEngine";
 import AuthWall from "@/components/AuthWall";
 import SplashScreen from "@/components/SplashScreen";
+import FloatingChat from "@/components/FloatingChat";
 import { checkAuth } from "@/actions/auth";
 
 export const dynamic = "force-dynamic";
@@ -48,6 +49,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SplashScreen />
+        <FloatingChat />
         <ServiceWorkerRegister />
         {isAuthenticated && <NotificationEngine />}
         
