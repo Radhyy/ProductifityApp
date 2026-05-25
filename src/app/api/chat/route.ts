@@ -42,7 +42,7 @@ export async function POST(req: Request) {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          model: "llama3-8b-8192", // Fast and efficient model
+          model: "llama-3.1-8b-instant", // Updated from decommissioned model
           messages: fullMessages,
           temperature: 0.7,
         })
