@@ -81,14 +81,14 @@ export default function AccountSettings() {
         <div className={styles.settingRow} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: 16 }}>
           <span className={styles.settingLabel} style={{ minWidth: 100 }}>Username</span>
           {editingName ? (
-            <div style={{ display: 'flex', gap: 8, flex: 1 }}>
+            <div style={{ display: 'flex', gap: 8, flex: 1, minWidth: 0 }}>
               <input 
                 type="text" 
                 value={name} 
                 onChange={e => setName(e.target.value)} 
-                style={{ flex: 1, padding: 8, borderRadius: 8, border: '1px solid #ddd' }}
+                style={{ flex: 1, minWidth: 0, padding: 8, borderRadius: 8, border: '1px solid #ddd' }}
               />
-              <button onClick={handleSaveName} style={{ background: '#000', color: '#fff', padding: '8px 16px', borderRadius: 8, border: 'none', cursor: 'pointer' }}>Save</button>
+              <button onClick={handleSaveName} style={{ flexShrink: 0, background: '#000', color: '#fff', padding: '8px 16px', borderRadius: 8, border: 'none', cursor: 'pointer' }}>Save</button>
             </div>
           ) : (
             <span className={styles.textMuted} onClick={() => setEditingName(true)} style={{ cursor: 'pointer', flex: 1, textAlign: 'right' }}>
