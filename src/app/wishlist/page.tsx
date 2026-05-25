@@ -26,7 +26,7 @@ export default function WishlistPage() {
   const loadData = async () => {
     setLoading(true);
     const res = await getWishlists();
-    if (res.success) {
+    if (res.success && res.data) {
       setWishlists(res.data);
     }
     setLoading(false);
