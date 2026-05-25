@@ -42,7 +42,7 @@ export default function Home() {
 
         // Load Wishlist
         getWishlists().then(wRes => {
-          if (wRes.success && wRes.data.length > 0) {
+          if (wRes.success && wRes.data && wRes.data.length > 0) {
             setWishlist(wRes.data[0]); // Show latest wishlist
           }
         });
