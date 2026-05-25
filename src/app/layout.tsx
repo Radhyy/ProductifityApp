@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   description: "All-in-one productivity dashboard with Pomodoro, To-do list, and Schedule.",
   manifest: "/manifest.json",
   icons: {
-    icon: "/IconApplication.png",
-    apple: "/IconApplication.png",
+    icon: "/iconApplicationNew.png",
+    apple: "/iconApplicationNew.png",
   },
   appleWebApp: {
     capable: true,
